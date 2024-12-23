@@ -1,0 +1,30 @@
+program maxminerr;
+var a: int;
+var b: int;
+var c: int;
+var max: int;
+var min: int;
+
+BEGIN
+    read(a);
+    read(b);
+    read(c);
+
+    if (a >= b) then
+        if (a >= c) then max := a
+        else max := c;
+    else
+        if (b >= c) then max := b
+        else max := c;
+
+    if (a <= b) then
+        if (a <= c) then min := a
+        else min := c;
+    else
+        if (b <= c) then min := b
+        else min := c;
+
+    write(max);
+    write(min);
+    read(1stnum); // This line should cause a lexical error
+END

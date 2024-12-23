@@ -1,0 +1,37 @@
+program prime_gcd;
+var n: int;
+var i: int;
+var gcd_a: int;
+var gcd_b: int;
+var gcd_res: int;
+var is_prime: int;
+
+BEGIN
+    read(n);
+
+    i := 2;
+    is_prime := 1;
+
+    while (i * i <= n) do
+    BEGIN
+        if (n % i = 0) then is_prime := 0;
+        i := i + 1;
+    END;
+
+    if (is_prime = 1 and n > 1) then
+        write("Prime")
+    else
+        write("Not Prime");
+
+    read(gcd_a);
+    read(gcd_b);
+
+    while (gcd_b != 0) do
+    BEGIN
+        gcd_res := gcd_a % gcd_b;
+        gcd_a := gcd_b;
+        gcd_b := gcd_res;
+    END;
+
+    write(gcd_a);  // GCD Result
+END

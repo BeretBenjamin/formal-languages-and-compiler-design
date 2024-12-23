@@ -1,0 +1,95 @@
+Finite Automaton Documentation
+Overview
+This Python program defines a FiniteAutomaton class that simulates a finite automaton (DFA) and provides functionality to read its configuration from a file, display its components, and check if a given sequence is accepted by the automaton. Additionally, it contains a function to detect tokens (identifier and integer constant) based on predefined automaton definitions.
+
+Classes
+FiniteAutomaton
+Attributes
+states (list): A list of states in the automaton.
+alphabet (list): A list of symbols (alphabet) that the automaton can process.
+transitions (dict): A dictionary where the keys are state names and the values are dictionaries that map input symbols to resulting states (state transitions).
+initial_state (str): The starting state of the automaton.
+final_states (list): A list of accepting (final) states.
+Methods
+__init__(self): Initializes a new FiniteAutomaton object with empty states, alphabet, transitions, and final states.
+
+read_from_file(self, filename): Reads the automaton's configuration from a specified file. The file should contain:
+
+A list of states (e.g., States: q0, q1, q_accept)
+A list of alphabet symbols (e.g., Alphabet: a, b, c, 0, 1, 2)
+A series of transition rules (e.g., q0 --a--> q1)
+The initial state (e.g., Initial State: q0)
+A list of final states (e.g., Final States: q_accept)
+The method processes these lines and populates the automaton's attributes accordingly.
+
+display(self): Prints out the details of the automaton, including:
+
+The states
+The alphabet
+The transition rules (from state to state with input symbols)
+The initial state
+The final states
+accepts(self, sequence): Given an input sequence, this method checks if the sequence is accepted by the automaton. The sequence is processed symbol by symbol, transitioning from one state to another based on the defined transition rules. If the sequence leads to a final state, it is accepted; otherwise, it is rejected.
+
+Functions
+detect_tokens(sequence)
+This function detects the type of a given sequence (identifier or integer constant) using predefined finite automata for identifiers and integer constants.
+
+Input: A string sequence to analyze.
+Output: A string indicating the type of token:
+"Identifier" if the sequence matches the identifier DFA.
+"Integer Constant" if the sequence matches the integer constant DFA.
+"Invalid Token" if the sequence doesn't match either DFA.
+DFA Definitions:
+Identifier DFA:
+
+The automaton starts at state q0 and moves to state q1 when encountering valid characters (letters a, b, c, or an underscore _).
+In state q1, it accepts additional valid characters (letters, digits 0-9, or underscores).
+The accepting state is q_accept.
+Integer Constant DFA:
+
+The automaton starts at state q0 and transitions to state q1 on encountering a sign (+ or -).
+In state q1, it accepts a digit (0-9).
+The automaton can then continue in state q2 with digits (0-9).
+The accepting state is q_accept.
+display_menu()
+This function displays a menu for interacting with the finite automaton. It provides the following options:
+
+View the automaton's states.
+View the automaton's alphabet.
+View the automaton's transition rules.
+View the automaton's initial state.
+View the automaton's final states.
+Test a sequence to check if it's accepted.
+Exit the program.
+main()
+This is the main function of the program. It initializes a FiniteAutomaton object, reads its configuration from a file (FA.in), and repeatedly displays the interaction menu until the user chooses to exit.
+
+Menu Options:
+Option 1: Displays the list of states.
+Option 2: Displays the alphabet.
+Option 3: Displays the transition rules.
+Option 4: Displays the initial state.
+Option 5: Displays the final states.
+Option 6: Allows the user to input a sequence and check if it is accepted by the automaton.
+Option 7: Exits the program.
+Example Usage
+Input: User selects option 1 (View States).
+
+Output: Displays the states of the automaton (e.g., q0, q1, q_accept).
+Input: User selects option 6 and inputs the sequence "abc".
+
+Output: The program checks if the sequence is accepted by the automaton. If it is, it prints a success message; otherwise, it prints a rejection message.
+File Format (FA.in)
+The FA.in file is expected to follow this format:
+
+sql
+Copy code
+States: q0, q1, q_accept
+Alphabet: a, b, c, 0, 1, 2
+q0 --a--> q1
+q1 --b--> q1
+q1 --c--> q_accept
+Initial State: q0
+Final States: q_accept
+Each section (states, alphabet, transitions, etc.) is parsed and used to configure the automaton.

@@ -1,0 +1,25 @@
+
+For my SymbolTable, I chose to implement one HashTable which can be used for both the identifiers table and constants table, as well as a single table that contains both.
+
+### Hash Table Implementation
+The approach for my HashTable is to have lists within lists. Essentially, at each position in the main list, there is another list. This allows us to handle collisions using separate chaining, where elements that hash to the same position are stored in the inner list.
+
+- get_size() method: This method returns the size of the HashTable.
+  
+- find_position_of_term(term) method: This method returns the position of the given term. The position is computed as follows: 
+    - We first compute the hash of the term using the hash(term) method.
+    - We check whether the list at the computed hash position is empty. If it is, we return None.
+    - If the list is not empty, we iterate through it to find the term, and when it is found, we create a Pair with the hash (index in the outer list) and the term’s index from the inner list.
+
+- find_by_pos(pos) method: This method returns the term from the HashTable based on its position, represented as a Pair. If the position is invalid, it raises an IndexError.
+
+- hash(key) method: This is my hash function. The approach used is to compute the sum of the ASCII values of the characters in the term and take the result modulo the size of the table. This ensures that the term is mapped to an index within the table.
+
+- contains_term(term) method: This method returns True or False, depending on whether the term exists in the SymbolTable or not.
+
+- add(term) method: This method adds a term to the HashTable. It first checks if the term is already present using the contains_term() method. If the term is not present, it is added to the corresponding inner list at the hash index.
+
+All of these methods, except the hash() method, are implemented in the SymbolTable class.
+
+### Pair Data Structure
+I have also defined the Pair as a simple data structure. It is composed of two integer values: first and second, representing the row and column positions within the table, respectively. This structure is used to store and return the position of terms in the table.

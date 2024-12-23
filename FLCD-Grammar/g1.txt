@@ -1,0 +1,37 @@
+program progrM ::= "program" IDENTIFIER ";" decllist cmpdstmt "."
+
+decllist ::= declaration | declaration ";" decllist
+
+declaration ::= IDENTIFIER ":" type
+
+type ::= "int" | "char" | "boolean" | arraydecl
+
+arraydecl ::= "array" "[" intgr "]" "of" type
+
+cmpdstmt ::= "begin" stmtlist "end"
+
+stmtlist ::= stmt | stmt ";" stmtlist
+
+stmt ::= simplstmt | structstmt
+
+simplstmt ::= assignstmt | iostmt
+
+assignstmt ::= IDENTIFIER ":=" expression
+
+iostmt ::= "read" "(" IDENTIFIER ")" | "write" "(" IDENTIFIER ")"
+
+structstmt ::= cmpdstmt | ifstmt | whilestmt
+
+ifstmt ::= "if" condition "then" stmt ["else" stmt]
+
+whilestmt ::= "while" condition "do" stmt
+
+condition ::= expression RELATION expression
+
+expression ::= expression "+" term | term
+
+term ::= term "*" factor | factor
+
+factor ::= "(" expression ")" | IDENTIFIER | const
+
+RELATION ::= "<" | "<=" | "=" | "<>" | ">=" | ">"
